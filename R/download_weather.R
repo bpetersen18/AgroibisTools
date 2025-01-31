@@ -1,8 +1,3 @@
-weather_variable <- c("minimum temperature", "maximum temperature")
-year <- 2022:2024
-source <- "gridmet"
-
-
 #' Creates the filename needed to download the weather data
 #'
 #' @param year A numeric vector of years
@@ -14,6 +9,30 @@ source <- "gridmet"
 #' @examples
 #' create_weather_filename(year = 2022:2024, weather_variable = c("minimum temperature", "maximum temperature"))
 create_weather_filename <- function(year, weather_variable, source = "gridmet") {
+  if (!(source %in% c("gridmet"))){
+    stop("source not supported")
+  }
+
+  if (!is.numeric(year)){
+    stop("is.numeric(year) is not TRUE")
+  }
+
+  if (!is.character(weather_variable)){
+    stop("is.character(weather_variable) is not TRUE")
+  }
+
+  if (!is.character(source)){
+    stop("is.character(source) is not TRUE")
+  }
+
+  if (!(length(year) > 0)){
+    stop("length(year) > 0 is not TRUE")
+  }
+
+  if (!(length(weather_variable) > 0)){
+    stop("length(weather_variable) > 0 is not TRUE")
+  }
+
   if (source == "gridmet"){
     if ("relative humidity" %in% weather_variable){
       # Remove relative humidity from weather_variable
@@ -36,7 +55,6 @@ create_weather_filename <- function(year, weather_variable, source = "gridmet") 
       dplyr::mutate(filename = paste0(weather_variable, "_", year, ".nc")) |>
       dplyr::pull(filename)
   } else {
-    stop("source not supported")
 
   }
 }
