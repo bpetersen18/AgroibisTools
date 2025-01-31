@@ -2,6 +2,17 @@ weather_variable <- c("minimum temperature", "maximum temperature")
 year <- 2022:2024
 source <- "gridmet"
 
+
+#' Creates the filename needed to download the weather data
+#'
+#' @param year A numeric vector of years
+#' @param weather_variable A character vector of weather variables. The variables can be "minimum temperature", "maximum temperature", "precipitation", "relative humidity", "solar radiation", and "wind speed"
+#' @param source A character vector of the source of the weather data. The source can be "gridmet"
+#'
+#' @returns A character vector of filenames
+#'
+#' @examples
+#' create_weather_filename(year = 2022:2024, weather_variable = c("minimum temperature", "maximum temperature"))
 create_weather_filename <- function(year, weather_variable, source = "gridmet") {
   if (source == "gridmet"){
     if ("relative humidity" %in% weather_variable){
